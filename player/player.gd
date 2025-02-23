@@ -6,9 +6,11 @@ var jump_speed = 400
 var is_facing_right = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_attacking = false  # Controla si el personaje está atacando
+var is_dead = false  # Nueva variable para evitar sobrescribir la animación
 
-func _ready() -> void:
+func _ready():
 	add_to_group("player")
+	#print("Player agregado al grupo: ", is_in_group("player"))  # Depuración
 	$hitbox/CollisionShape2D.disabled = true
 
 func _physics_process(delta):
@@ -29,8 +31,8 @@ func attack():
 		is_attacking = false
 
 func update_animations():
-	if is_attacking: 
-		return  # No cambiar animación si está atacando
+	if is_dead or is_attacking:  # 🚨 Evita que cualquier otra animación sobreescriba "dead"
+		return
 
 	if velocity.x != 0:
 		animated_sprite.play("walk")
@@ -52,6 +54,22 @@ func flip():
 func move_x():
 	var input_axis = Input.get_axis("move_left","move_right")
 	velocity.x = input_axis * move_speed
+
+func die():
+	if is_dead:
+		return  # Evita múltiples ejecuciones de la muerte
+
+	is_dead = true
+	velocity = Vector2.ZERO
+	animated_sprite.play("dead")
+	await animated_sprite.animation_finished
+
+	# Primero cambiamos de escena
+	get_tree().change_scene_to_file("res://menu_gameover/game_over.tscn")
+
+	# Luego eliminamos el nodo, pero con un pequeño retraso para evitar conflictos	
+	queue_free()
+
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:

@@ -45,5 +45,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "SALIR"
 
+[node name="Label2" type="Label" parent="BoxContainer"]
+layout_mode = 2
+text = "Hecho por Luis Noriega"
+horizontal_alignment = 2
+
 [connection signal="pressed" from="BoxContainer/boton_menu" to="." method="_on_boton_menu_pressed"]
 [connection signal="pressed" from="BoxContainer/boton_salir" to="." method="_on_boton_salir_pressed"]

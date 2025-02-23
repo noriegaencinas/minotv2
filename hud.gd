@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var lives = 5
+var lives = 2
 var score = 0
 
 func _ready():
@@ -21,4 +21,4 @@ func lose_life():
 		game_over()
 
 func game_over():
-	get_tree().change_scene_to_file("res://game_over.tscn")  # Cambia a una escena de Game Over
+	get_tree().change_scene_to_file("res://menu_gameover/game_over.tscn")  # Cambia a una escena de Game Over

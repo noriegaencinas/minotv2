@@ -185,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1elyj")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -294,8 +294,7 @@ script = ExtResource("1_io7yt")
 [node name="animatedSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_cc18u")
-animation = &"attack"
-frame = 3
+animation = &"dead"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.5, 16.5)
@@ -305,7 +304,8 @@ metadata/_edit_group_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="hitbox" type="Area2D" parent="."]
-collision_mask = 6
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(35, 16.5)

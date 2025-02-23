@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://rv3vmmwy3w0g"]
+[gd_scene load_steps=46 format=3 uid="uid://rv3vmmwy3w0g"]
 
 [ext_resource type="Script" path="res://enemy1/enemy_1.gd" id="1_gxn8x"]
 [ext_resource type="Texture2D" uid="uid://dtsvikenex7wj" path="res://enemy1/Attack.png" id="2_lggs7"]
@@ -165,7 +165,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hq8w4")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -283,6 +283,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m42xs"]
 size = Vector2(41, 63)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_joxn6"]
+size = Vector2(11.3333, 33.3333)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q244h"]
 size = Vector2(20, 25)
 
@@ -295,8 +298,7 @@ script = ExtResource("1_gxn8x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_h4cri")
-animation = &"attack"
-frame = 3
+animation = &"dead"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.5, 16.5)
@@ -310,8 +312,20 @@ target_position = Vector2(100, 0)
 [node name="RayCast2D2" type="RayCast2D" parent="Node2D"]
 target_position = Vector2(-100, 0)
 
+[node name="Area2D2" type="Area2D" parent="."]
+scale = Vector2(0.75, 0.75)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(67.6667, 35.3333)
+shape = SubResource("RectangleShape2D_joxn6")
+
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(36, 26.5)
 shape = SubResource("RectangleShape2D_q244h")
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
