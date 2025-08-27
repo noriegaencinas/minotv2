@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmln6h4jl70t"]
+
+[ext_resource type="Script" path="res://menu_principal/main_menu.gd" id="1_g8ilr"]
+[ext_resource type="Texture2D" uid="uid://ds1j161r4jj0d" path="res://assets/mountains-background-game-vector.jpg" id="2_wiwpi"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g8ilr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.338942, 0.235072, 0.130538, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -357.0
+offset_top = -246.0
+offset_right = 1563.0
+offset_bottom = 714.0
+texture = ExtResource("2_wiwpi")
+expand_mode = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 271.0
+offset_right = 747.0
+offset_bottom = 464.0
+theme_override_constants/separation = 10
+vertical = true
+
+[node name="Label" type="Label" parent="BoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Bienvenido"
+horizontal_alignment = 1
+
+[node name="boton_menu" type="Button" parent="BoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "JUGAR"
+
+[node name="boton_salir" type="Button" parent="BoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SALIR"
+
+[connection signal="pressed" from="BoxContainer/boton_menu" to="." method="_on_boton_jugar_pressed"]
+[connection signal="pressed" from="BoxContainer/boton_menu" to="." method="_on_boton_menu_pressed"]
+[connection signal="pressed" from="BoxContainer/boton_salir" to="." method="_on_boton_salir_pressed"]
